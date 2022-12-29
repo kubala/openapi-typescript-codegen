@@ -1,10 +1,9 @@
-const getResponseBody = async (response: Response): Promise<any> => {
+const getResponseBody = async (config: OpenAPIConfig, response: Response): Promise<any> => {
 	if (response.status !== 204) {
 		try {
 			const contentType = response.headers.get('Content-Type');
 			if (contentType) {
-				const jsonTypes = ['application/json', 'application/problem+json']
-				const isJSON = jsonTypes.some(type => contentType.toLowerCase().startsWith(type));
+				const isJSON = config.JSON_MEDIA_TYPES?.some(type => contentType.toLowerCase().startsWith(type));
 				if (isJSON) {
 					return await response.json();
 				} else {

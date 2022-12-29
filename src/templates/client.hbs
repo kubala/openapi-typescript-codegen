@@ -35,7 +35,6 @@ import { {{{name}}}{{{@root.postfix}}} } from './services/{{{name}}}{{{@root.pos
 				USERNAME: OpenAPI?.USERNAME,
 				PASSWORD: OpenAPI?.PASSWORD,
 				HEADERS: OpenAPI?.HEADERS,
-				ENCODE_PATH: OpenAPI?.ENCODE_PATH,
 			} as OpenAPIConfig,
 		},
 		{
@@ -70,6 +69,7 @@ export class {{{clientName}}} {
 			PASSWORD: config?.PASSWORD,
 			HEADERS: config?.HEADERS,
 			ENCODE_PATH: config?.ENCODE_PATH,
+			JSON_MEDIA_TYPES: ['application/json', 'application/problem+json', ...(config?.JSON_MEDIA_TYPES || [])]
 		});
 
 		{{#each services}}

@@ -213,6 +213,7 @@ export type OpenAPIConfig = {
     PASSWORD?: string | Resolver<string>;
     HEADERS?: Headers | Resolver<Headers>;
     ENCODE_PATH?: (path: string) => string;
+    JSON_MEDIA_TYPES?: string[];
 };
 
 export const OpenAPI: OpenAPIConfig = {
@@ -225,6 +226,7 @@ export const OpenAPI: OpenAPIConfig = {
     PASSWORD: undefined,
     HEADERS: undefined,
     ENCODE_PATH: undefined,
+    JSON_MEDIA_TYPES: undefined,
 };
 "
 `;
@@ -458,13 +460,12 @@ const getResponseHeader = (response: Response, responseHeader?: string): string 
     return undefined;
 };
 
-const getResponseBody = async (response: Response): Promise<any> => {
+const getResponseBody = async (config: OpenAPIConfig, response: Response): Promise<any> => {
     if (response.status !== 204) {
         try {
             const contentType = response.headers.get('Content-Type');
             if (contentType) {
-                const jsonTypes = ['application/json', 'application/problem+json']
-                const isJSON = jsonTypes.some(type => contentType.toLowerCase().startsWith(type));
+                const isJSON = config.JSON_MEDIA_TYPES?.some(type => contentType.toLowerCase().startsWith(type));
                 if (isJSON) {
                     return await response.json();
                 } else {
@@ -517,7 +518,7 @@ export const request = <T>(config: OpenAPIConfig, options: ApiRequestOptions): C
 
             if (!onCancel.isCancelled) {
                 const response = await sendRequest(config, options, url, body, formData, headers, onCancel);
-                const responseBody = await getResponseBody(response);
+                const responseBody = await getResponseBody(config, response);
                 const responseHeader = getResponseHeader(response, options.responseHeader);
 
                 const result: ApiResult = {
@@ -3306,6 +3307,7 @@ export type OpenAPIConfig = {
     PASSWORD?: string | Resolver<string>;
     HEADERS?: Headers | Resolver<Headers>;
     ENCODE_PATH?: (path: string) => string;
+    JSON_MEDIA_TYPES?: string[];
 };
 
 export const OpenAPI: OpenAPIConfig = {
@@ -3318,6 +3320,7 @@ export const OpenAPI: OpenAPIConfig = {
     PASSWORD: undefined,
     HEADERS: undefined,
     ENCODE_PATH: undefined,
+    JSON_MEDIA_TYPES: undefined,
 };
 "
 `;
@@ -3551,13 +3554,12 @@ const getResponseHeader = (response: Response, responseHeader?: string): string 
     return undefined;
 };
 
-const getResponseBody = async (response: Response): Promise<any> => {
+const getResponseBody = async (config: OpenAPIConfig, response: Response): Promise<any> => {
     if (response.status !== 204) {
         try {
             const contentType = response.headers.get('Content-Type');
             if (contentType) {
-                const jsonTypes = ['application/json', 'application/problem+json']
-                const isJSON = jsonTypes.some(type => contentType.toLowerCase().startsWith(type));
+                const isJSON = config.JSON_MEDIA_TYPES?.some(type => contentType.toLowerCase().startsWith(type));
                 if (isJSON) {
                     return await response.json();
                 } else {
@@ -3610,7 +3612,7 @@ export const request = <T>(config: OpenAPIConfig, options: ApiRequestOptions): C
 
             if (!onCancel.isCancelled) {
                 const response = await sendRequest(config, options, url, body, formData, headers, onCancel);
-                const responseBody = await getResponseBody(response);
+                const responseBody = await getResponseBody(config, response);
                 const responseHeader = getResponseHeader(response, options.responseHeader);
 
                 const result: ApiResult = {
