@@ -1,4 +1,3 @@
-import { EOL } from 'os';
 import { resolve } from 'path';
 import {
     createCompilerHost,
@@ -51,7 +50,7 @@ export const compileWithTypescript = (dir: string) => {
         const message = formatDiagnosticsWithColorAndContext(diagnostics, {
             getCurrentDirectory: () => sys.getCurrentDirectory(),
             getCanonicalFileName: f => f,
-            getNewLine: () => EOL,
+            getNewLine: () => '\n',
         });
         console.log(message);
     }

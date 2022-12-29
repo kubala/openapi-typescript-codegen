@@ -1,9 +1,8 @@
-import { EOL } from 'os';
-
 import type { Service } from '../client/interfaces/Service';
 import { HttpClient } from '../HttpClient';
 import { Indent } from '../Indent';
 import { writeFile } from './fileSystem';
+import { resolve } from 'path';
 import type { Templates } from './registerHandlebarTemplates';
 import { writeClientServices } from './writeClientServices';
 
@@ -41,6 +40,6 @@ describe('writeClientServices', () => {
 
         await writeClientServices(services, templates, '/', HttpClient.FETCH, false, false, Indent.SPACE_4, 'Service');
 
-        expect(writeFile).toBeCalledWith('/UserService.ts', `service${EOL}`);
+        expect(writeFile).toBeCalledWith(resolve('/UserService.ts'), `service\n`);
     });
 });

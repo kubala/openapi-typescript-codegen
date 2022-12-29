@@ -1,8 +1,6 @@
-import { EOL } from 'os';
-
 export const formatCode = (s: string): string => {
     let indent: number = 0;
-    let lines = s.split(EOL);
+    let lines = s.split('\n');
     lines = lines.map(line => {
         line = line.trim().replace(/^\*/g, ' *');
         let i = indent;
@@ -19,5 +17,5 @@ export const formatCode = (s: string): string => {
         }
         return result;
     });
-    return lines.join(EOL);
+    return lines.join('\n');
 };

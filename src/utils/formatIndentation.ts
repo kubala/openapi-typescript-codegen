@@ -1,9 +1,7 @@
-import { EOL } from 'os';
-
 import { Indent } from '../Indent';
 
 export const formatIndentation = (s: string, indent: Indent): string => {
-    let lines = s.split(EOL);
+    let lines = s.split('\n');
     lines = lines.map(line => {
         switch (indent) {
             case Indent.SPACE_4:
@@ -15,6 +13,6 @@ export const formatIndentation = (s: string, indent: Indent): string => {
         }
     });
     // Make sure we have a blank line at the end
-    const content = lines.join(EOL);
-    return `${content}${EOL}`;
+    const content = lines.join('\n');
+    return `${content}${'\n'}`;
 };
