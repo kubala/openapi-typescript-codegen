@@ -27,7 +27,7 @@ describe('index', () => {
 
     it('downloads and parses v3 without issues', async () => {
         await OpenAPI.generate({
-            input: 'https://raw.githubusercontent.com/ferdikoomen/openapi-typescript-codegen/master/test/spec/v3.json',
+            input: 'https://raw.githubusercontent.com/kubala/openapi-typescript-codegen/critic-adjustments/test/spec/v3.json',
             output: './generated/v3-downloaded/',
             write: false,
         });

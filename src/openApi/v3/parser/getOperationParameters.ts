@@ -37,12 +37,6 @@ export const getOperationParameters = (openApi: OpenApi, parameters: OpenApiPara
                     operationParameters.imports.push(...parameter.imports);
                     break;
 
-                case 'formData':
-                    operationParameters.parametersForm.push(parameter);
-                    operationParameters.parameters.push(parameter);
-                    operationParameters.imports.push(...parameter.imports);
-                    break;
-
                 case 'cookie':
                     operationParameters.parametersCookie.push(parameter);
                     operationParameters.parameters.push(parameter);

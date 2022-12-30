@@ -1,5 +1,6 @@
 import { HttpClient } from './HttpClient';
 import { Indent } from './Indent';
+import { Validator, ValidationError, Schema } from 'jsonschema';
 import { parse as parseV2 } from './openApi/v2';
 import { parse as parseV3 } from './openApi/v3';
 import { getOpenApiSpec } from './utils/getOpenApiSpec';
@@ -8,6 +9,8 @@ import { isString } from './utils/isString';
 import { postProcessClient } from './utils/postProcessClient';
 import { registerHandlebarTemplates } from './utils/registerHandlebarTemplates';
 import { writeClient } from './utils/writeClient';
+
+import OpenApiV3Schema from './openApi/v3/schema.json';
 
 export { HttpClient } from './HttpClient';
 export { Indent } from './Indent';
@@ -49,6 +52,7 @@ export type Options = {
  * @param postfixModels Model name postfix
  * @param request Path to custom request file
  * @param write Write the files to disk (true or false)
+ * @param schema Schema for validating the input files. V3 only.
  */
 export const generate = async ({
     input,
@@ -65,7 +69,7 @@ export const generate = async ({
     postfixServices = 'Service',
     postfixModels = '',
     request,
-    write = true,
+    write = true
 }: Options): Promise<void> => {
     const openApi = isString(input) ? await getOpenApiSpec(input) : input;
     const openApiVersion = getOpenApiVersion(openApi);
@@ -101,6 +105,18 @@ export const generate = async ({
         }
 
         case OpenApiVersion.V3: {
+                const validator = new Validator();
+                const result = validator.validate(openApi, OpenApiV3Schema as Schema);
+                if (!result.valid) {
+                    if (isString(input)) console.error(`Failed to parse input file: ${input}`);
+                    console.error(
+                        'Given inout does not follows OpenAPI v3 spec defined at https://github.com/OAI/OpenAPI-Specification/blob/main/schemas/v3.0/schema.json'
+                    );
+                    result.errors.forEach(e => {
+                        console.error(`error: ${e.toString()}`);
+                    });
+                    throw new Error('parser error');
+                }
             const client = parseV3(openApi);
             const clientFinal = postProcessClient(client);
             if (!write) break;

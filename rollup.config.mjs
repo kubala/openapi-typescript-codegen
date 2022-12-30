@@ -1,4 +1,5 @@
 import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import { readFileSync } from 'fs';
@@ -57,6 +58,7 @@ const getPlugins = () => {
         typescript({
             module: 'esnext',
         }),
+        json(),
     ];
     if (process.env.NODE_ENV === 'development') {
         return plugins;

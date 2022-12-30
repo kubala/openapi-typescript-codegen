@@ -15,7 +15,8 @@
         "strict": true,
         "skipLibCheck": true,
         "allowSyntheticDefaultImports": true,
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "resolveJsonModule": true
     },
 
     "files": [

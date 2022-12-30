@@ -11,9 +11,13 @@
     ],
     "paths": {
         "/api/v{api-version}/no-tag": {
-            "tags": [],
             "get": {
-                "operationId": "ServiceWithEmptyTag"
+                "operationId": "ServiceWithEmptyTag",
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
+                }
             }
         },
         "/api/v{api-version}/simple": {
@@ -21,43 +25,78 @@
                 "tags": [
                     "Simple"
                 ],
-                "operationId": "GetCallWithoutParametersAndResponse"
+                "operationId": "GetCallWithoutParametersAndResponse",
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
+                }
             },
             "put": {
                 "tags": [
                     "Simple"
                 ],
-                "operationId": "PutCallWithoutParametersAndResponse"
+                "operationId": "PutCallWithoutParametersAndResponse",
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
+                }
             },
             "post": {
                 "tags": [
                     "Simple"
                 ],
-                "operationId": "PostCallWithoutParametersAndResponse"
+                "operationId": "PostCallWithoutParametersAndResponse",
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
+                }
             },
             "delete": {
                 "tags": [
                     "Simple"
                 ],
-                "operationId": "DeleteCallWithoutParametersAndResponse"
+                "operationId": "DeleteCallWithoutParametersAndResponse",
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
+                }
             },
             "options": {
                 "tags": [
                     "Simple"
                 ],
-                "operationId": "OptionsCallWithoutParametersAndResponse"
+                "operationId": "OptionsCallWithoutParametersAndResponse",
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
+                }
             },
             "head": {
                 "tags": [
                     "Simple"
                 ],
-                "operationId": "HeadCallWithoutParametersAndResponse"
+                "operationId": "HeadCallWithoutParametersAndResponse",
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
+                }
             },
             "patch": {
                 "tags": [
                     "Simple"
                 ],
-                "operationId": "PatchCallWithoutParametersAndResponse"
+                "operationId": "PatchCallWithoutParametersAndResponse",
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
+                }
             }
         },
         "/api/v{api-version}/descriptions/": {
@@ -71,39 +110,56 @@
                         "description": "Testing multiline comments in string: First line\nSecond line\n\nFourth line",
                         "name": "parameterWithBreaks",
                         "in": "query",
-                        "type": "string"
+                        "schema":{
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "Testing backticks in string: `backticks` and ```multiple backticks``` should work",
                         "name": "parameterWithBackticks",
                         "in": "query",
-                        "type": "string"
+                        "schema":{
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "Testing slashes in string: \\backwards\\\\\\ and /forwards/// should work",
                         "name": "parameterWithSlashes",
                         "in": "query",
-                        "type": "string"
+                        "schema":{
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "Testing expression placeholders in string: ${expression} should work",
                         "name": "parameterWithExpressionPlaceholders",
                         "in": "query",
-                        "type": "string"
+                        "schema":{
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "Testing quotes in string: 'single quote''' and \"double quotes\"\"\" should work",
                         "name": "parameterWithQuotes",
                         "in": "query",
-                        "type": "string"
+                        "schema":{
+                            "type": "string"
+                        }
                     },
                     {
                         "description": "Testing reserved characters in string: /* inline */ and /** inline **/ should work",
                         "name": "parameterWithReservedCharacters",
                         "in": "query",
-                        "type": "string"
+                        "schema":{
+                            "type": "string"
+                        }
                     }
-                ]
+                ],
+                "responses": {
+                "default":{
+                    "description": "default"
+                }
+            }
             }
         },
         "/api/v{api-version}/parameters/deprecated": {
@@ -120,12 +176,16 @@
                         "name": "parameter",
                         "in": "header",
                         "required": true,
-                        "nullable": true,
                         "schema": {
                             "$ref": "#/components/schemas/DeprecatedModel"
                         }
                     }
-                ]
+                ],
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
+                }
             }
         },
         "/api/v{api-version}/parameters/{parameterPath}": {
@@ -140,8 +200,8 @@
                         "name": "parameterHeader",
                         "in": "header",
                         "required": true,
-                        "nullable": true,
                         "schema": {
+                            "nullable": true,
                             "type": "string"
                         }
                     },
@@ -150,18 +210,8 @@
                         "name": "parameterQuery",
                         "in": "query",
                         "required": true,
-                        "nullable": true,
                         "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "This is the parameter that goes into the form data",
-                        "name": "parameterForm",
-                        "in": "formData",
-                        "required": true,
-                        "nullable": true,
-                        "schema": {
+                            "nullable": true,
                             "type": "string"
                         }
                     },
@@ -170,8 +220,8 @@
                         "name": "parameterCookie",
                         "in": "cookie",
                         "required": true,
-                        "nullable": true,
                         "schema": {
+                            "nullable": true,
                             "type": "string"
                         }
                     },
@@ -180,8 +230,8 @@
                         "name": "parameterPath",
                         "in": "path",
                         "required": true,
-                        "nullable": true,
                         "schema": {
+                            "nullable": true,
                             "type": "string"
                         }
                     },
@@ -189,8 +239,8 @@
                         "name": "api-version",
                         "in": "path",
                         "required": true,
-                        "nullable": true,
                         "schema": {
+                            "nullable": true,
                             "type": "string"
                         }
                     }
@@ -198,13 +248,17 @@
                 "requestBody": {
                     "description": "This is the parameter that goes into the body",
                     "required": true,
-                    "nullable": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/ModelWithString"
                             }
                         }
+                    }
+                },
+                "responses": {
+                    "default":{
+                        "description": "default"
                     }
                 }
             }
@@ -220,9 +274,9 @@
                         "description": "This is the parameter that goes into the path",
                         "name": "parameter.path.1",
                         "in": "path",
-                        "required": false,
-                        "nullable": false,
+                        "required": true,
                         "schema": {
+                            "nullable": false,
                             "type": "string"
                         }
                     },
@@ -230,9 +284,9 @@
                         "description": "This is the parameter that goes into the path",
                         "name": "parameter-path-2",
                         "in": "path",
-                        "required": false,
-                        "nullable": false,
+                        "required": true,
                         "schema": {
+                            "nullable": false,
                             "type": "string"
                         }
                     },
@@ -240,9 +294,9 @@
                         "description": "This is the parameter that goes into the path",
                         "name": "PARAMETER-PATH-3",
                         "in": "path",
-                        "required": false,
-                        "nullable": false,
+                        "required": true,
                         "schema": {
+                            "nullable": false,
                             "type": "string"
                         }
                     },
@@ -251,8 +305,8 @@
                         "name": "default",
                         "in": "query",
                         "required": false,
-                        "nullable": false,
                         "schema": {
+                            "nullable": false,
                             "type": "string"
                         }
                     },
@@ -261,8 +315,8 @@
                         "name": "parameter.header",
                         "in": "header",
                         "required": true,
-                        "nullable": true,
                         "schema": {
+                            "nullable": true,
                             "type": "string"
                         }
                     },
@@ -271,18 +325,8 @@
                         "name": "parameter-query",
                         "in": "query",
                         "required": true,
-                        "nullable": true,
                         "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "This is the parameter that goes into the request form data",
-                        "name": "parameter_form",
-                        "in": "formData",
-                        "required": true,
-                        "nullable": true,
-                        "schema": {
+                            "nullable": true,
                             "type": "string"
                         }
                     },
@@ -291,8 +335,8 @@
                         "name": "PARAMETER-COOKIE",
                         "in": "cookie",
                         "required": true,
-                        "nullable": true,
                         "schema": {
+                            "nullable": true,
                             "type": "string"
                         }
                     },
@@ -300,8 +344,8 @@
                         "name": "api-version",
                         "in": "path",
                         "required": true,
-                        "nullable": true,
                         "schema": {
+                            "nullable": true,
                             "type": "string"
                         }
                     }
@@ -309,13 +353,18 @@
                 "requestBody": {
                     "description": "This is the parameter that goes into the body",
                     "required": true,
-                    "nullable": true,
                     "content": {
                         "application/json": {
                             "schema": {
+                                "nullable": true,
                                 "$ref": "#/components/schemas/ModelWithString"
                             }
                         }
+                    }
+                },
+                "responses": {
+                    "default":{
+                        "description": "default"
                     }
                 }
             }
@@ -347,6 +396,11 @@
                             }
                         }
                     }
+                },
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
                 }
             },
             "post": {
@@ -375,6 +429,11 @@
                             }
                         }
                     }
+                },
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
                 }
             }
         },
@@ -390,6 +449,11 @@
                 ],
                 "requestBody": {
                     "$ref": "#/components/requestBodies/SimpleRequestBody"
+                },
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
                 }
             }
         },
@@ -405,6 +469,11 @@
                 ],
                 "requestBody": {
                     "$ref": "#/components/requestBodies/SimpleFormData"
+                },
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
                 }
             }
         },
@@ -419,9 +488,9 @@
                         "description": "This is a simple string with default value",
                         "name": "parameterString",
                         "in": "query",
-                        "nullable": true,
                         "schema": {
                             "type": "string",
+                            "nullable": true,
                             "default": "Hello World!"
                         }
                     },
@@ -429,9 +498,9 @@
                         "description": "This is a simple number with default value",
                         "name": "parameterNumber",
                         "in": "query",
-                        "nullable": true,
                         "schema": {
                             "type": "number",
+                            "nullable": true,
                             "default": 123
                         }
                     },
@@ -439,8 +508,8 @@
                         "description": "This is a simple boolean with default value",
                         "name": "parameterBoolean",
                         "in": "query",
-                        "nullable": true,
                         "schema": {
+                            "nullable": true,
                             "type": "boolean",
                             "default": true
                         }
@@ -462,15 +531,20 @@
                         "description": "This is a simple model with default value",
                         "name": "parameterModel",
                         "in": "query",
-                        "nullable": true,
                         "schema": {
+                            "nullable": true,
                             "$ref": "#/components/schemas/ModelWithString",
                             "default": {
                                 "prop": "Hello World!"
                             }
                         }
                     }
-                ]
+                ],
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
+                }
             },
             "post": {
                 "tags": [
@@ -534,7 +608,12 @@
                             }
                         }
                     }
-                ]
+                ],
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
+                }
             },
             "put": {
                 "tags": [
@@ -621,7 +700,12 @@
                             "default": null
                         }
                     }
-                ]
+                ],
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
+                }
             }
         },
         "/api/v{api-version}/duplicate": {
@@ -629,25 +713,46 @@
                 "tags": [
                     "Duplicate"
                 ],
-                "operationId": "DuplicateName"
+                "operationId": "DuplicateName",
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
+                }
+
             },
             "post": {
                 "tags": [
                     "Duplicate"
                 ],
-                "operationId": "DuplicateName"
+                "operationId": "DuplicateName",
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
+                }
             },
             "put": {
                 "tags": [
                     "Duplicate"
                 ],
-                "operationId": "DuplicateName"
+                "operationId": "DuplicateName",
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
+                }
             },
             "delete": {
                 "tags": [
                     "Duplicate"
                 ],
-                "operationId": "DuplicateName"
+                "operationId": "DuplicateName",
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
+                }
             }
         },
         "/api/v{api-version}/no-content": {
@@ -700,6 +805,7 @@
                 "operationId": "CallWithResponse",
                 "responses": {
                     "default": {
+                        "description": "response",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -886,72 +992,66 @@
                         "name": "parameterArrayCSV",
                         "in": "query",
                         "required": true,
-                        "nullable": true,
                         "schema": {
+                            "nullable": true,
                             "type": "array",
                             "items": {
                                 "type": "string"
                             }
                         },
-                        "collectionFormat": "csv"
+                        "style": "form",
+                        "explode": false
+
                     },
                     {
                         "description": "This is an array parameter that is sent as ssv format (space-separated values)",
                         "name": "parameterArraySSV",
                         "in": "query",
                         "required": true,
-                        "nullable": true,
                         "schema": {
+                            "nullable": true,
                             "type": "array",
                             "items": {
                                 "type": "string"
                             }
                         },
-                        "collectionFormat": "ssv"
-                    },
-                    {
-                        "description": "This is an array parameter that is sent as tsv format (tab-separated values)",
-                        "name": "parameterArrayTSV",
-                        "in": "query",
-                        "required": true,
-                        "nullable": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "collectionFormat": "tsv"
+                        "style": "spaceDelimited"
                     },
                     {
                         "description": "This is an array parameter that is sent as pipes format (pipe-separated values)",
                         "name": "parameterArrayPipes",
                         "in": "query",
                         "required": true,
-                        "nullable": true,
                         "schema": {
                             "type": "array",
+                            "nullable": true,
                             "items": {
                                 "type": "string"
                             }
                         },
-                        "collectionFormat": "pipes"
+                        "style": "pipeDelimited"
                     },
                     {
                         "description": "This is an array parameter that is sent as multi format (multiple parameter instances)",
                         "name": "parameterArrayMulti",
                         "in": "query",
                         "required": true,
-                        "nullable": true,
                         "schema": {
+                            "nullable": true,
                             "type": "array",
                             "items": {
                                 "type": "string"
                             }
                         },
-                        "collectionFormat": "multi"
+                        "style": "form",
+                        "explode": true
                     }
-                ]
+                ],
+                "responses": {
+                    "default":{
+                        "description": "default"
+                    }
+                }
             }
         },
         "/api/v{api-version}/types": {
@@ -1048,6 +1148,7 @@
                         "description": "This is a number parameter",
                         "name": "id",
                         "in": "path",
+                        "required": true,
                         "schema": {
                             "type": "integer",
                             "format": "int32"
@@ -1091,45 +1192,6 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v{api-version}/upload": {
-            "post": {
-                "tags": [
-                    "Upload"
-                ],
-                "operationId": "UploadFile",
-                "parameters": [
-                    {
-                        "description": "Supply a file reference for upload",
-                        "name": "file",
-                        "in": "formData",
-                        "required": true,
-                        "schema": {
-                            "type": "file"
-                        }
-                    },
-                    {
-                        "name": "api-version",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "nullable": true
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "boolean"
                                 }
                             }
                         }
@@ -1236,6 +1298,11 @@
                                 }
                             }
                         }
+                    }
+                },
+                "responses": {
+                    "default":{
+                        "description": "default"
                     }
                 }
             },
@@ -1541,7 +1608,8 @@
             },
             "SimpleFile": {
                 "description": "This is a simple file",
-                "type": "file"
+                "type": "string",
+                "format": "binary"
             },
             "SimpleReference": {
                 "description": "This is a simple reference",
@@ -1758,17 +1826,13 @@
                     },
                     "nullableProp2": {
                         "description": "This is a simple string property",
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     },
                     "nullableRequiredProp2": {
                         "description": "This is a simple string property",
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     }
                 }
             },
@@ -1876,7 +1940,8 @@
                     "propWithFile": {
                         "type": "array",
                         "items": {
-                            "type": "file"
+                            "type": "string",
+                            "format": "binary"
                         }
                     },
                     "propWithNumber": {
@@ -1903,6 +1968,7 @@
                 "deprecated": true,
                 "description": "This is a deprecated model with a deprecated property",
                 "type": "object",
+                "nullable": true,
                 "properties": {
                     "prop": {
                         "deprecated": true,
@@ -2335,28 +2401,12 @@
                                 "properties": {
                                     "third": {
                                         "type": "string",
-                                        "required": true,
                                         "readOnly": true,
                                         "nullable": true
                                     }
                                 }
                             }
                         }
-                    }
-                }
-            },
-            "ModelWithDuplicateProperties": {
-                "description": "This is a model with duplicated properties",
-                "type": "object",
-                "properties": {
-                    "prop": {
-                        "$ref": "#/components/schemas/ModelWithString"
-                    },
-                    "prop": {
-                        "$ref": "#/components/schemas/ModelWithString"
-                    },
-                    "prop": {
-                        "$ref": "#/components/schemas/ModelWithString"
                     }
                 }
             },
